@@ -1,2 +1,2 @@
 # Read-is-a-game
-Desarrollar la habilidad para leer y escribir, componer y descomponer.
+Desarrollar la habilidad para leer y escribir, componer y descomponer silabas, palabras y oraciones.
