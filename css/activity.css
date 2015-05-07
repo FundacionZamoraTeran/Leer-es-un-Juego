@@ -1,3 +1,103 @@
 #main-toolbar #activity-button {
-  background-image: url(../activity/activity-icon.svg);
+  background-image: url("../activity//activity-icon.svg");
 }
+
+* { margin: 0; padding: 0;}
+
+html, body {
+	/*height: 100%; 
+	width: 100%;*/
+}
+canvas {
+	display: block;
+}
+
+body {
+	background: #098aed; 
+	color: #fff;
+	font-family: Verdana, Arial, sans-serif;
+	font-size: 18px;
+}
+
+h1 {
+	color: #800000;
+	font-size: 30px;
+}
+
+p {
+	color: #000280;
+	font-weight: bold;
+	font-size: 18px;
+	margin: 0 20px;
+}
+
+a {
+	color: #fff;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a.button {
+	background: #185da8;
+	border-radius: 5px;
+	color: white;
+	display: block;
+	font-size: 30px;
+	margin: 30px 0 0 25px;
+	padding: 10px;
+	width: 150px;
+	float: left;
+}
+
+a.button:hover {
+	background: #090;
+	color: yellow;
+	text-decoration: none;
+}
+
+#game {
+	/*height: 600px;
+	left: 40%;
+	margin: 0px 0 0 -180px;
+	position: relative;
+	top: 50%
+	width: 250px;*/
+	padding: 2% 30%;
+}
+
+/*#gameCanvas {
+	background: #098aed;/*#001022;
+}*/
+
+#gameUI {
+	height: 700px;
+	position: absolute;/* coloca UI arriba del canvas */
+	width: 650px;
+}
+
+#gameIntro, #gameComplete {
+	background: #c0c0c0;/*#098aed;/*green*//*rgba(0, 0, 0, 0.5);*/
+	//margin-top: 300px;
+	padding: 40px 0;
+	text-align: center;
+}
+
+#gameStats {
+	font-size: 14px;
+	maring: 20px 0;
+}
+
+#gameStats .gameReset {
+	margin: 20px 20px 0 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+.gameScore {
+	color: blue;
+}
+
