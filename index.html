@@ -1,36 +1,47 @@
 <!DOCTYPE html>
-<html>
-
-<head>
-<meta charset="utf-8" />
-<title>My Activity</title>
-<link rel="stylesheet" media="not screen and (device-width: 1200px) and (device-height: 900px)"
-      href="lib/sugar-web/graphics/css/sugar-96dpi.css">
-<link rel="stylesheet" media="screen and (device-width: 1200px) and (device-height: 900px)"
-      href="lib/sugar-web/graphics/css/sugar-200dpi.css">
-<link rel="stylesheet" href="css/activity.css">
-<script data-main="js/loader" src="lib/require.js"></script>
-</head>
-
-<body>
-<div id="main-toolbar" class="toolbar">
-  <button class="toolbutton" id="activity-button" title="My Activity"></button>
-
-  <!-- Add more buttons here -->
-
-  <!-- Buttons with class="pull-right" will be right aligned -->
-  <button class="toolbutton pull-right" id="stop-button" title="Stop"></button>
-</div>
-
-<!-- The content of your activity goes inside the canvas -->
-<div id="canvas">
-
-  <!-- Replace this message with your own content -->
-  <h1>Congratulations!</h1>
-  <p>You are ready to develop this activity. Go ahead and edit the files.<br />
-    You can remove this message in the index.html.</p>
-
-</div>
+<html lang='es'>
+	<head>
+		<title>Leer es un Juego | Activity</title>
+		<meta charset="utf-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" href="./css/game.css" type="text/css">
+		<link rel="stylesheet" href="./lib/sugar-web/graphics/css/sugar.css" type="text/css">
+		<script src="./js/jquery-1.11.2.min.js"></script>
+		<script src="lib/require.js"></script>
+		<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>-->
+		<script type="text/javascript" src="./js/game.js"></script>
+	</head>
+<body background="white">
+	<div id="main-toolbar" class="toolbar">
+                <button class="toolbutton" id="activity-button" title="My Activity"></button>
+                <button class="toolbutton pull-right" id="stop-button" title="Stop"></button>
+        </div>
+	<div id="game">
+		<div id="gameUI">
+			<div id="gameIntro">
+				<img src="./images/logo2.png" />
+				<h1>Leer es un Juego!</h1>
+				<p>Aprender los sonidos de las letras, entendiendo las silabas y las palabras</p>
+				<p>
+					<a id="sonidoPlay" class="button" href="">Sonidos</a>
+					<a id="silabasPlay" class="button" href="">Silabas</a>
+					<a id="palabrasPlay" class="button" href="">Palabras</a>
+				</p>
+			</div>
+			<div id="gameStats">
+				<p>Leer es un Juego <span id="gameRemaining"></span></p>
+				<p>Aciertos: <span id="gameScore"></span></p>
+				<p><a class="gameReset" href="">Reset</a></p>
+			</div>
+			<div id="gameComplete">
+				<h1>You Win!</h1>
+				<p>Felicitaciones, completastes el juego<span class="gameScore"></span>Clicks.</p>
+				<p><a class="gameReset button" href="">Play again</a></p>
+			</div>
+		</div>
+		<canvas id="gameCanvas" width="550" height="600">
+			<!-- algo va a aqui -->
+		</canvas>
+	</div>
 </body>
-
 </html>
