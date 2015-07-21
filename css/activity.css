@@ -1,3 +1,11 @@
 #main-toolbar #activity-button {
   background-image: url(../activity/activity-icon.svg);
 }
+
+#game, #sidebar {
+	height: 100%;
+}
+
+#sidebar {
+	border-right: 1px solid #ccc;
+}
