@@ -1,3 +1,5 @@
+"user strict";
+
 define(function (require) {
     var activity = require("sugar-web/activity/activity");
     var jquery = require("jquery");
@@ -7,6 +9,15 @@ define(function (require) {
 
         // Initialize the activity.
         activity.setup();
+
+        var selectMenu = function(level) {
+        	$('#level-' + level).toggle();
+        	$('#menu').toggle();
+        };
+
+        $('.menu-button').on('click', function() {
+        	selectMenu($(this).attr('value'));
+        });
     });
 
 });

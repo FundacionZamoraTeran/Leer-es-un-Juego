@@ -1,11 +1,34 @@
+#canvas {
+	background-color: #0d6fc3 !important;
+}
+
 #main-toolbar #activity-button {
   background-image: url(../activity/activity-icon.svg);
 }
 
-#game, #sidebar {
+.game, .sidebar {
 	height: 100%;
 }
 
-#sidebar {
+.sidebar {
 	border-right: 1px solid #ccc;
+}
+
+.hidden {
+	display: none;
+}
+
+.grid {
+	height: 100%;
+}
+
+.grid > div {
+	height: 100%;
+}
+
+.menu-button {
+	display: block;
+	width: 300px;
+	margin: 0 auto 0 auto;
+	border-radius: 5px;
 }
