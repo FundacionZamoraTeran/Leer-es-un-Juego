@@ -4,6 +4,8 @@ define(function (require) {
     var activity = require("sugar-web/activity/activity");
     var jquery = require("jquery");
     var interact = require("interact");
+    var mespeak = require("mespeak/mespeak");
+    var speakClient = require("speak/speakClient");
     // Manipulate the DOM only when it is ready.
     require(['domReady!'], function (doc) {
 
@@ -18,16 +20,15 @@ define(function (require) {
         	selectMenu($(this).attr('value'));
         });
 
+        // require(["json!mespeak/mespeak_config.json"], function(config) {
+            //console.log(JSON.stringify(config));
+            // meSpeak.loadConfig("mespeak_config.json");
+            //meSpeak.speak('hola mundo');
+        // });
+        // speak("Hello World");
         /* *
          * Interact
          * */
-        if ('speechSynthesis' in window) {
-            // Synthesis support. Make your web apps talk!
-            console.log("hola");
-        }
-        else {
-            console.log("Bye");
-        }
         // Event fires after dragging an element
         var moveItem = function(event) {
             // Current element
