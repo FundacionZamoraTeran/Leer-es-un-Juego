@@ -4,8 +4,10 @@ define(function (require) {
     var activity = require("sugar-web/activity/activity");
     var jquery = require("jquery");
     var interact = require("interact");
-    var mespeak = require("mespeak/mespeak");
+    var mespeak = require("mespeak/mespeak.full");
     var speakClient = require("speak/speakClient");
+    meSpeak.loadConfig("mespeak_config.json");
+    meSpeak.loadVoice("es.json");
     // Manipulate the DOM only when it is ready.
     require(['domReady!'], function (doc) {
 
@@ -20,12 +22,7 @@ define(function (require) {
         	selectMenu($(this).attr('value'));
         });
 
-        // require(["json!mespeak/mespeak_config.json"], function(config) {
-            //console.log(JSON.stringify(config));
-            // meSpeak.loadConfig("mespeak_config.json");
-            //meSpeak.speak('hola mundo');
-        // });
-        // speak("Hello World");
+        meSpeak.speak('hola mundo');
         /* *
          * Interact
          * */
