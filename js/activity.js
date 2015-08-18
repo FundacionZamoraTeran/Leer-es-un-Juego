@@ -5,7 +5,6 @@ define(function (require) {
     var jquery = require("jquery");
     var interact = require("interact");
     var mespeak = require("mespeak/mespeak.full");
-    var speakClient = require("speak/speakClient");
     meSpeak.loadConfig("mespeak_config.json");
     meSpeak.loadVoice("es.json");
     // Manipulate the DOM only when it is ready.
