@@ -19,9 +19,9 @@ define(function (require) {
 
         $('.menu-button').on('click', function() {
         	selectMenu($(this).attr('value'));
+            meSpeak.speak('hola mundo');
         });
 
-        meSpeak.speak('hola mundo');
         /* *
          * Interact
          * */
