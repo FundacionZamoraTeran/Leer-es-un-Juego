@@ -5,8 +5,8 @@ define(function (require) {
     var jquery = require("jquery");
     var interact = require("interact");
     var mespeak = require("mespeak/mespeak.full");
-    meSpeak.loadConfig("mespeak_config.json");
-    meSpeak.loadVoice("es.json");
+    // meSpeak.loadConfig("mespeak_config.json");
+    // meSpeak.loadVoice("es.json");
     // Manipulate the DOM only when it is ready.
     require(['domReady!'], function (doc) {
 
@@ -19,7 +19,7 @@ define(function (require) {
 
         $('.menu-button').on('click', function() {
         	selectMenu($(this).attr('value'));
-            meSpeak.speak('hola mundo');
+            // meSpeak.speak('hola mundo');
         });
 
         /* *
@@ -63,7 +63,10 @@ define(function (require) {
 
             // The element enters the area
             ondragenter: function(event) {
-                console.log("The elment enters the area");
+                console.log(event);
+                var target = event.relatedTarget;
+                $(target).addClass('big');
+                console.log("Add class");
             },
 
             // The element leave the area
