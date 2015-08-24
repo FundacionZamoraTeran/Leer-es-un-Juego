@@ -6,12 +6,29 @@ define(function (require) {
     var interact = require("interact");
     var Mustache = require("mustache.min")
 
+    /*
+     * General function to move interact objects
+     */
+    var moveItem = function(event) {
+        // Current element
+        var target = event.target;
+        // Get axis values + movement change
+        x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
+        y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+        // Transform element
+        target.style.webkitTransform =
+        target.style.transform =
+            'translate(' + x + 'px, ' + y + 'px)';
+        // Update element attributes
+        target.setAttribute('data-x', x);
+        target.setAttribute('data-y', y);
+    };
 
     /*
      * Manage letters for the first level
      */
     function Alphabet() {
-        this.letters = ['A', 'B', 'C'];
+        this.letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
     }
 
     Alphabet.prototype.setAlphabet = function() {
@@ -32,6 +49,47 @@ define(function (require) {
             if (level === '1') {
                 alphabet = new Alphabet();
                 alphabet.setAlphabet();
+
+                $('#upper-button').on('click', function() {
+                    $('.item').addClass('upper');
+                });
+
+                $('#lower-button').on('click', function() {
+                    $('.item').removeClass('upper');
+                });
+
+                var items = interact(".item");
+                var area = interact("#area");
+
+                items.draggable({
+                    initial: true,
+                    onmove: moveItem,
+                });
+
+                area.dropzone({
+                    // Only accept .item
+                    accept: '.item',
+                    // An element must be completely inside the area
+                    overlap: 1,
+
+                    // The element enters the area
+                    ondragenter: function(event) {
+                        var target = event.relatedTarget;
+                        $(target).addClass('enter');
+                    },
+
+                    ondragleave: function(event) {
+                        var target = event.relatedTarget;
+                        $(target).removeClass('enter');
+                    },
+
+                    // The element is dropped within the area
+                    ondrop: function(event) {
+                        var target = event.relatedTarget;
+                        $(target).removeClass('enter');
+                        alphabet.setAlphabet();
+                    },
+                });
             }
         };
 
@@ -39,66 +97,5 @@ define(function (require) {
         	selectMenu($(this).attr('value'));
         });
 
-        /* *
-         * Interact
-         * */
-        // Event fires after dragging an element
-        var moveItem = function(event) {
-            // Current element
-            var target = event.target;
-            // Get axis values + movement change
-            x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
-            y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
-            // Transform element
-            target.style.webkitTransform =
-            target.style.transform =
-                'translate(' + x + 'px, ' + y + 'px)';
-            // Update element attributes
-            target.setAttribute('data-x', x);
-            target.setAttribute('data-y', y);
-        };
-
-        var items = interact(".item");
-        var area = interact("#area");
-
-        items.draggable({
-            initial: true,
-            onmove: moveItem,
-        });
-
-        area.dropzone({
-            // Only accept .item
-            accept: '.item',
-
-            // An element must be completely inside the area
-            overlap: 1,
-
-            // The element starts moving
-            ondropactivate: function (event) {
-                console.log("The element starts moving");
-            },
-
-            // The element enters the area
-            ondragenter: function(event) {
-                console.log(event);
-                var target = event.relatedTarget;
-                $(target).addClass('big');
-                console.log("Add class");
-            },
-
-            // The element leave the area
-            ondragleave: function(event) {
-                console.log("The element leave the area");
-            },
-
-            // The element is dropped within the area
-            ondrop: function(event) {
-                console.log("The element is dropped within the area");
-            },
-        });
-
-        /* *
-         * End Interact
-         * */
     });
 });
