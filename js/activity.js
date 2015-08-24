@@ -4,9 +4,22 @@ define(function (require) {
     var activity = require("sugar-web/activity/activity");
     var jquery = require("jquery");
     var interact = require("interact");
-    var mespeak = require("mespeak/mespeak.full");
-    // meSpeak.loadConfig("mespeak_config.json");
-    // meSpeak.loadVoice("es.json");
+    var Mustache = require("mustache.min")
+
+
+    /*
+     * Manage letters for the first level
+     */
+    function Alphabet() {
+        this.letters = ['A', 'B', 'C'];
+    }
+
+    Alphabet.prototype.setAlphabet = function() {
+        var output = Mustache.render('{{#letters}}<div class="item">{{.}}</div>{{/letters}}', this);
+        $('#letters').html(output);
+    }
+
+
     // Manipulate the DOM only when it is ready.
     require(['domReady!'], function (doc) {
 
@@ -15,11 +28,15 @@ define(function (require) {
         var selectMenu = function(level) {
         	$('#level-' + level).toggle();
         	$('#menu').toggle();
+
+            if (level === '1') {
+                alphabet = new Alphabet();
+                alphabet.setAlphabet();
+            }
         };
 
         $('.menu-button').on('click', function() {
         	selectMenu($(this).attr('value'));
-            // meSpeak.speak('hola mundo');
         });
 
         /* *
