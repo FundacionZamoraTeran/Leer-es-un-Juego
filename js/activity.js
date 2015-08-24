@@ -36,6 +36,11 @@ define(function (require) {
         $('#letters').html(output);
     }
 
+    Alphabet.prototype.reloadAlphabet = function(element) {
+        this.setAlphabet();
+        $('#letters').append(element);
+    }
+
 
     // Manipulate the DOM only when it is ready.
     require(['domReady!'], function (doc) {
@@ -49,6 +54,7 @@ define(function (require) {
             if (level === '1') {
                 alphabet = new Alphabet();
                 alphabet.setAlphabet();
+                var letters = new Array();
 
                 $('#upper-button').on('click', function() {
                     $('.item').addClass('upper');
@@ -86,8 +92,9 @@ define(function (require) {
                     // The element is dropped within the area
                     ondrop: function(event) {
                         var target = event.relatedTarget;
+                        letters.push(target);
                         $(target).removeClass('enter');
-                        alphabet.setAlphabet();
+                        alphabet.reloadAlphabet(letters);
                     },
                 });
             }
