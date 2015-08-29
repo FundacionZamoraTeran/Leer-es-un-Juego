@@ -4,7 +4,7 @@ define(function (require) {
     var activity = require("sugar-web/activity/activity");
     var jquery = require("jquery");
     var interact = require("interact");
-    var Mustache = require("mustache.min")
+    var Mustache = require("mustache.min");
 
     /*
      * General function to move interact objects
@@ -13,9 +13,16 @@ define(function (require) {
         // Current element
         var target = event.target;
         // Get axis values + movement change
+        if (!target.hasAttribute('data-x')) {
+            x0 = $(target).position().top;
+            y0 = $(target).position().left;
+        }
+
         x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
         y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
         // Transform element
+        target.style.top = x0 + 'px';
+        target.style.left = y0 + 'px';
         target.style.webkitTransform =
         target.style.transform =
             'translate(' + x + 'px, ' + y + 'px)';
@@ -34,12 +41,12 @@ define(function (require) {
     Alphabet.prototype.setAlphabet = function() {
         var output = Mustache.render('{{#letters}}<div class="item">{{.}}</div>{{/letters}}', this);
         $('#letters').html(output);
-    }
+    };
 
     Alphabet.prototype.reloadAlphabet = function(element) {
         this.setAlphabet();
-        $('#letters').append(element);
-    }
+        $('#canvas').append(element);
+    };
 
 
     // Manipulate the DOM only when it is ready.
@@ -54,7 +61,7 @@ define(function (require) {
             if (level === '1') {
                 alphabet = new Alphabet();
                 alphabet.setAlphabet();
-                var letters = new Array();
+                var letters = [];
 
                 $('#upper-button').on('click', function() {
                     $('.item').addClass('upper');
@@ -92,6 +99,7 @@ define(function (require) {
                     // The element is dropped within the area
                     ondrop: function(event) {
                         var target = event.relatedTarget;
+                        target.style.position = 'absolute';
                         letters.push(target);
                         $(target).removeClass('enter');
                         alphabet.reloadAlphabet(letters);
