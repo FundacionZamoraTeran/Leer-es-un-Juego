@@ -5,6 +5,7 @@ define(function (require) {
     var jquery = require("jquery");
     var interact = require("interact");
     var Mustache = require("mustache.min");
+    var words = require("../js/words.js");
 
     /*
      * General function to move interact objects
@@ -48,6 +49,28 @@ define(function (require) {
         $('#canvas').append(element);
     };
 
+
+    /*
+     * Manage words for the second level
+     */
+
+    function Soup() {
+        this.words = [];
+    }
+
+    Soup.prototype.randomWords = function() {
+        for (var i = 0; this.words.length < 10; i++) {
+            var tmp_word = words[Math.floor(Math.random() * words.length)];
+            if ($.inArray(tmp_word, this.words) === -1) {
+                this.words.push(tmp_word);
+            }
+        }
+    };
+
+    Soup.prototype.setWords = function() {
+        var output = Mustache.render('{{#words}}<div class="word">{{.}}</div>{{/words}}', this);
+        $('#words-list').html(output);
+    };
 
     // Manipulate the DOM only when it is ready.
     require(['domReady!'], function (doc) {
@@ -105,6 +128,12 @@ define(function (require) {
                         alphabet.reloadAlphabet(letters);
                     },
                 });
+            }
+
+            else if (level === '2') {
+                var soup = new Soup();
+                soup.randomWords();
+                soup.setWords();
             }
         };
 

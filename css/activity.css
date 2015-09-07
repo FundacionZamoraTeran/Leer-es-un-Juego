@@ -62,9 +62,14 @@
   box-shadow: 0 2px #eb893d;
 }
 
+.instrucciones {
+  clear: both;
+  padding: 10px;
+}
+
 /* Level 0ne */
 
-#alphabet {
+#alphabet, #soup {
   padding-right: 0 !important;
   background-color: rgba(255, 255, 255,0.5);
 }
@@ -80,4 +85,28 @@
 
 .enter {
   box-shadow: 0 2px 5px #000;
+}
+
+/* Level Two */
+
+#soup h1 {
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: #0ba14b;
+  margin: 0;
+  padding: 20px 0 20px 0;
+}
+
+.word {
+  float: left;
+  clear: both;
+  padding: 10px 15px 10px 15px;
+  margin: 5px;
+  text-align: center;
+  border-radius: 15px;
+  background-color: #3d53a1;
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
 }

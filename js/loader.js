@@ -3,7 +3,7 @@ requirejs.config({
     paths: {
         activity: "../js",
         text : "requirejs-plugins/lib/text", //text is required
-        json : "requirejs-plugins/src/json" //alias to plugin
+        json : "requirejs-plugins/src/json", //alias to plugin
     }
 });
 
