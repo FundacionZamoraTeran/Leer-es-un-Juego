@@ -5,8 +5,10 @@ define(function (require) {
     var jquery = require("jquery");
     var interact = require("interact");
     var Mustache = require("mustache.min");
+    var wordmatrix = require("../js/wordmatrix.js");
     var words = require("../js/words.js");
 
+    var sugarCellSize = 75;
     /*
      * General function to move interact objects
      */
@@ -50,6 +52,7 @@ define(function (require) {
     };
 
 
+
     /*
      * Manage words for the second level
      */
@@ -70,6 +73,11 @@ define(function (require) {
     Soup.prototype.setWords = function() {
         var output = Mustache.render('{{#words}}<div class="word">{{.}}</div>{{/words}}', this);
         $('#words-list').html(output);
+        var gameCanvas = document.getElementById("matrix-canvas");
+        gameCanvas.height = window.innerHeight - sugarCellSize;
+        gameCanvas.width = 850;
+        this.matrixView = new wordmatrix.MatrixView(gameCanvas, this);
+        this.matrixView.init();
     };
 
     // Manipulate the DOM only when it is ready.
