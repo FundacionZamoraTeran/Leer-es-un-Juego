@@ -74,8 +74,9 @@ define(function (require) {
         var output = Mustache.render('{{#words}}<div class="word">{{.}}</div>{{/words}}', this);
         $('#words-list').html(output);
         var gameCanvas = document.getElementById("matrix-canvas");
-        gameCanvas.height = window.innerHeight - sugarCellSize;
-        gameCanvas.width = 850;
+        //gameCanvas.height = window.innerHeight - sugarCellSize;
+        gameCanvas.height = 600;
+        gameCanvas.width = 600;
         this.matrixView = new wordmatrix.MatrixView(gameCanvas, this);
         this.matrixView.init();
     };
