@@ -129,3 +129,11 @@
   padding: 100px;
   font-size: 20px;
 }
+
+canvas {
+  background: #fff;
+  border-radius: 25px;
+  margin-left: 20px;
+  margin-top: 5px;
+  font-weight: bold;
+}

@@ -101,6 +101,9 @@ define(function (require) {
 
         // Initialize the activity.
         activity.setup();
+        $('#reload-button').on('click', function() {
+            location.reload();
+        });
         var selectMenu = function(level) {
         	$('#level-' + level).toggle();
         	$('#menu').toggle();
