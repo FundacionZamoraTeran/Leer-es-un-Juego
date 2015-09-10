@@ -177,9 +177,8 @@ define(function (require) {
         this.stage.on('mousedown', function (event) {
             var cell = this.getCell(event.stageX, event.stageY);
             this.select_word_line.graphics.clear();
-            var color = createjs.Graphics.getRGB(0xe0e0e0, 1.0);
             this.markWord(cell, cell,
-                          this.select_word_line, color, true);
+                          this.select_word_line, '#3d53a1', true);
             this.prepareWordAnimation(cell, cell);
             this.showDancingLetters();
             if (this.start_cell === null) {
@@ -189,7 +188,6 @@ define(function (require) {
         }, this);
 
         this.stage.on("pressmove", function (event) {
-
             var end_cell = this.getCell(event.stageX, event.stageY);
             if (this.end_cell !== null &&
                 (end_cell[0] == this.end_cell[0]) &&
@@ -233,7 +231,9 @@ define(function (require) {
                         this.wordsFoundcontainer.addChild(found_word_line);
 
                         // show in the word list
-                        var finished = this.game.addFoundWord(word.word);
+                        // AQUI SE AGREGA LA PALABRA GUARDAD
+
+                        this.game.markWordFound(word.word);
                     }
                 }
             }

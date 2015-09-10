@@ -59,6 +59,7 @@ define(function (require) {
 
     function Soup() {
         this.words = [];
+        this.words_found = [];
     }
 
     Soup.prototype.randomWords = function() {
@@ -79,6 +80,20 @@ define(function (require) {
         gameCanvas.width = 600;
         this.matrixView = new wordmatrix.MatrixView(gameCanvas, this);
         this.matrixView.init();
+    };
+
+    Soup.prototype.markWordFound = function(word) {
+        if ($.inArray(word, this.words_found) === -1) {
+            this.words_found.push(word);
+            $("div.word:contains('" + word +  "')").addClass("word-found");
+            if (this.words_found.length >= 10) {
+                $('#win-msg').removeClass('hidden');
+                $('#again').on('click', function(e) {
+                   e.preventDefault();
+                   location.reload();
+                });
+            }
+        }
     };
 
     // Manipulate the DOM only when it is ready.
