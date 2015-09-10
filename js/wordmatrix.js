@@ -146,6 +146,224 @@ define(function (require) {
             this.stage.update();
         };
 
+        this.stop = function() {
+            // stop the animation
+            this.animation_runnning = false;
+        };
+
+        this.changeCase = function () {
+            for (var i = 0; i < this.letters.length; i++) {
+                var lettersRow = this.letters[i];
+                for (var j = 0; j < lettersRow.length; j++) {
+                    var letter = this.letters[i][j];
+                    if (this.game.lowerCase) {
+                        letter.text = letter.text.toLowerCase();
+                    } else {
+                        letter.text = letter.text.toUpperCase();
+                    }
+                }
+            }
+            this.container.updateCache();
+        };
+
+        this.stage.on("pressup", function (event) {
+            this.restoreAnimatedWord();
+            this.hideDancingLetters();
+            this.verifyWord(this.start_cell, this.end_cell);
+            this.start_cell = null;
+            this.end_cell = null;
+        }, this);
+
+        this.stage.on('mousedown', function (event) {
+            var cell = this.getCell(event.stageX, event.stageY);
+            this.select_word_line.graphics.clear();
+            var color = createjs.Graphics.getRGB(0xe0e0e0, 1.0);
+            this.markWord(cell, cell,
+                          this.select_word_line, color, true);
+            this.prepareWordAnimation(cell, cell);
+            this.showDancingLetters();
+            if (this.start_cell === null) {
+                this.start_cell = [cell[0], cell[1]];
+                this.end_cell = null;
+            }
+        }, this);
+
+        this.stage.on("pressmove", function (event) {
+
+            var end_cell = this.getCell(event.stageX, event.stageY);
+            if (this.end_cell !== null &&
+                (end_cell[0] == this.end_cell[0]) &&
+                (end_cell[1] == this.end_cell[1])) {
+                return;
+            }
+            this.end_cell = end_cell;
+            this.select_word_line.graphics.clear();
+            this.markWord(this.start_cell, this.end_cell,
+                          this.select_word_line, '#3d53a1', true);
+            this.prepareWordAnimation(this.start_cell, this.end_cell);
+            this.showDancingLetters();
+
+            this.stage.update();
+        }, this);
+
+        this.verifyWord = function(start_cell, end_cell) {
+            if ((start_cell !== null) && (end_cell !== null)) {
+                for (var n = 0; n < this.wordLocations.length; n++) {
+                    var word = this.wordLocations[n];
+                    var nextFn = wordfind.orientations[word.orientation];
+                    var end_word = nextFn(start_cell[0], start_cell[1],
+                                          word.word.length - 1);
+                    if ((word.x == start_cell[0] && word.y == start_cell[1] &&
+                         word.end_x == end_cell[0] &&
+                         word.end_y == end_cell[1]) ||
+                        (word.end_x == start_cell[0] &&
+                         word.end_y == start_cell[1] &&
+                         word.x == end_cell[0] && word.y == end_cell[1])) {
+                        // verify if was already marked
+                        //if (this.game.words.indexOf(word.word) > -1) {
+                            //console.log("HERE?");
+                            //continue;
+                        //}
+
+                        var found_word_line = new createjs.Shape();
+                        this.markWord(start_cell, end_cell,
+                                      found_word_line, '#3d53a1', false);
+
+                        found_word_line.mouseEnabled = false;
+                        this.wordsFoundcontainer.addChild(found_word_line);
+
+                        // show in the word list
+                        var finished = this.game.addFoundWord(word.word);
+                    }
+                }
+            }
+            this.select_word_line.graphics.clear();
+            this.stage.update();
+        };
+
+        /*
+        Draw a rounded rectangle over shape
+        star_cell, end_cell = array of integer
+        shape = createjs.Shape
+        color = createjs.Graphics.getRGB
+        */
+        this.markWord = function(start_cell, end_cell, shape, color, fill) {
+
+            var start_cell_x = start_cell[0];
+            var start_cell_y = start_cell[1];
+
+            var end_cell_x = end_cell[0];
+            var end_cell_y = end_cell[1];
+
+            var x1 = start_cell_x * this.cell_size + this.cell_size / 2;
+            var y1 = this.margin_y + start_cell_y * this.cell_size +
+                this.cell_size / 2;
+            var x2 = end_cell_x * this.cell_size + this.cell_size / 2;
+            var y2 = this.margin_y + end_cell_y * this.cell_size +
+                this.cell_size / 2;
+
+            var diff_x = x2 - x1;
+            var diff_y = y2 - y1;
+            var angle_rad = Math.atan2(diff_y, diff_x);
+            var angle_deg = angle_rad * 180 / Math.PI;
+            var distance = diff_x / Math.cos(angle_rad);
+            if (Math.abs(angle_deg) == 90) {
+                distance = Math.abs(diff_y);
+            }
+
+            var line_width = this.cell_size / 10;
+            shape.graphics.setStrokeStyle(line_width, "round");
+            if (fill) {
+                shape.graphics.beginFill(color);
+            } else {
+                shape.graphics.beginStroke(color);
+            }
+            shape.graphics.drawRoundRect(
+                -(this.cell_size - line_width) / 2,
+                -(this.cell_size - line_width) / 2,
+                distance + this.cell_size - line_width,
+                this.cell_size - line_width,
+                this.cell_size / 2);
+            shape.graphics.endStroke();
+            shape.rotation = angle_deg;
+            shape.x = x1;
+            shape.y = y1;
+        };
+
+        this.restoreAnimatedWord = function() {
+            this.animatedLetters = [];
+            this.animationContainer.removeAllChildren();
+        };
+
+        this.prepareWordAnimation = function(start_cell, end_cell) {
+            this.restoreAnimatedWord();
+            var start_cell_x = start_cell[0];
+            var start_cell_y = start_cell[1];
+
+            var end_cell_x = end_cell[0];
+            var end_cell_y = end_cell[1];
+
+            if (start_cell_x != end_cell_x) {
+                var inclination = (end_cell_y - start_cell_y) /
+                                  (end_cell_x - start_cell_x);
+                var start = start_cell_x;
+                var end = end_cell_x;
+                if (start_cell_x > end_cell_x) {
+                    start = end_cell_x;
+                    end = start_cell_x;
+                }
+
+                for (var x = start; x <= end; x++) {
+                    y = Math.round(start_cell_y + inclination *
+                                   (x - start_cell_x));
+                    if (isNaN(y)) {
+                        y = start_cell_y;
+                    }
+                    this.animatedLetters.push(this.letters[y][x]);
+                }
+            } else {
+                var start = start_cell_y;
+                var end = end_cell_y;
+                if (start_cell_y > end_cell_y) {
+                    start = end_cell_y;
+                    end = start_cell_y;
+                }
+
+                for (var y = start; y <= end; y++) {
+                    this.animatedLetters.push(this.letters[y][start_cell_x]);
+                }
+            }
+
+        };
+
+        this.showDancingLetters = function() {
+            // apply the effect over the selected letters
+            for (var i = 0; i < this.animatedLetters.length; i++) {
+                matrixLetter = this.animatedLetters[i];
+                // add another letter to animate
+                var text = new createjs.Text(matrixLetter.text,
+                                         font, "#ffffff");
+                text.x = matrixLetter.x;
+                text.y = matrixLetter.y + text.getMeasuredHeight() / 2;
+                text.textAlign = "center";
+                // this is needed to set the rotation center
+                text.regY = text.getMeasuredHeight() / 2;
+                text.scaleX = 1.5;
+                text.scaleY = 1.5;
+                // text.rotation = 45;
+
+                //createjs.Tween.get(text, {loop:true}).to(
+                //    {rotation:-90}, 600).to(
+                //    {rotation:90}, 600);
+
+                this.animationContainer.addChild(text);
+            }
+        };
+
+        this.hideDancingLetters = function() {
+            this.animationContainer.removeAllChildren();
+        };
+
 
     }
     wordmatrix.MatrixView = MatrixView;
