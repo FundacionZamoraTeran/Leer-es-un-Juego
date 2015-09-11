@@ -29,8 +29,13 @@
 .menu-button {
 	display: block;
 	width: 300px;
-	margin: 0 auto 0 auto;
+	margin: 300px auto 0 auto;
 	border-radius: 5px;
+  background-color: #f8d09a;
+  color: #000;
+  font-weight: bold;
+  font-size: 24px;
+  box-shadow: 0 2px #eb893d;
 }
 
 .item {
@@ -144,4 +149,44 @@ canvas {
   margin-left: 20px;
   margin-top: 5px;
   font-weight: bold;
+}
+
+#words-box {
+  background-color: rgba(255, 255, 255,0.5);
+  margin-top: 100px;
+  margin-left: 50px;
+  padding: 40px;
+  text-align: center;
+}
+
+#level-1 {
+  background: url(../images/level1.jpg) 0 0 no-repeat;
+}
+
+#level-2 {
+  background: url(../images/level2.jpg) 0 0 no-repeat;
+}
+
+#level-3 {
+  background: url(../images/level3.jpg) 0 0 no-repeat;
+}
+
+#menu-1 {
+  background: url(../images/menu1.jpg) 0 0 no-repeat;
+}
+
+#menu-2 {
+  background: url(../images/menu2.jpg) 0 0 no-repeat;
+}
+
+#menu-3 {
+  background: url(../images/menu3.jpg) 0 0 no-repeat;
+}
+
+#reload-button {
+  background: url(../images/back.svg) 0 0 no-repeat;
+}
+
+#reload-button:hover {
+  background-color: #000;
 }

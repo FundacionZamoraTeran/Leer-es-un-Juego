@@ -106,8 +106,10 @@ define(function (require) {
 
     Sentences.prototype.randomSentence = function() {
         this.sentence = sentences[Math.floor(Math.random() * sentences.length)];
-        var output = Mustache.render('{{#sentence}}<div class="word">{{.}}</div>{{/sentence}}', this);
+        var output = Mustache.render('{{#sentence}}<div class="word word-sent">{{.}}</div>{{/sentence}}', this);
         $('#words-sentence').html(output);
+        var box = Mustache.render('{{#sentence}} ___________ {{/sentence}}', this);
+        $('#words-box').html(box);
     };
 
 
@@ -179,8 +181,30 @@ define(function (require) {
             }
 
             else if (level === '3') {
-                var sente = new Sentences();
-                sente.randomSentence();
+                var sentence = new Sentences();
+                sentence.randomSentence();
+
+                var items_word = interact(".word-sent");
+                var area_word = interact("#area-sent");
+
+                items_word.draggable({
+                    initial: true,
+                    onmove: moveItem,
+                });
+
+                area_word.dropzone({
+                    // Only accept .item
+                    accept: '.word-sent',
+                    // An element must be completely inside the area
+                    overlap: 1,
+
+                    // The element enters the area
+                    ondragenter: function(event) {
+                        var target = event.relatedTarget;
+                        $(target).addClass('enter');
+                    },
+
+                });
             }
         };
 
