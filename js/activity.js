@@ -7,6 +7,7 @@ define(function (require) {
     var Mustache = require("mustache.min");
     var wordmatrix = require("../js/wordmatrix.js");
     var words = require("../js/words.js");
+    var sentences = require("../js/sentences.js");
 
     var sugarCellSize = 75;
     /*
@@ -96,6 +97,20 @@ define(function (require) {
         }
     };
 
+    /*
+     * Manage letters for the third level
+     */
+    function Sentences() {
+        this.sentence = [];
+    }
+
+    Sentences.prototype.randomSentence = function() {
+        this.sentence = sentences[Math.floor(Math.random() * sentences.length)];
+        var output = Mustache.render('{{#sentence}}<div class="word">{{.}}</div>{{/sentence}}', this);
+        $('#words-sentence').html(output);
+    };
+
+
     // Manipulate the DOM only when it is ready.
     require(['domReady!'], function (doc) {
 
@@ -161,6 +176,11 @@ define(function (require) {
                 var soup = new Soup();
                 soup.randomWords();
                 soup.setWords();
+            }
+
+            else if (level === '3') {
+                var sente = new Sentences();
+                sente.randomSentence();
             }
         };
 
