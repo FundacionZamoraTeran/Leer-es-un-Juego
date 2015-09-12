@@ -183,10 +183,20 @@ canvas {
   background: url(../images/menu3.jpg) 0 0 no-repeat;
 }
 
-#reload-button {
+.reload-button {
   background: url(../images/back.svg) 0 0 no-repeat;
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  bottom:5px;
+  right: 5px;
 }
 
-#reload-button:hover {
-  background-color: #000;
+.restart {
+  background: url(../images/restart.svg) 0 0 no-repeat;
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  bottom:5px;
+  right: 50px;
 }

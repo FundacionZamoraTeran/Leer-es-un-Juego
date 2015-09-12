@@ -16,7 +16,6 @@
 <body>
 <div id="main-toolbar" class="toolbar">
   <button class="toolbutton" id="activity-button" title="My Activity"></button>
-  <button class="toolbutton" id="reload-button" title="Volver"></button>
   <button class="toolbutton pull-right" id="stop-button" title="Stop"></button>
 </div>
 
@@ -44,6 +43,7 @@
           <button id="lower-button">minúscula</button>
         </div>
         <div class="col-2-3 game" id="area">
+            <button class="reload-button" title="Volver"></button>
         </div>
 	</div>
 
@@ -62,7 +62,8 @@
           </div -->
         </div>
         <div class="col-2-3 game">
-          <canvas id="matrix-canvas"></canvas>
+            <canvas id="matrix-canvas"></canvas>
+            <button class="reload-button" title="Volver"></button>
         </div>
     </div>
 
@@ -74,6 +75,8 @@
 		</div>
         <div class="col-2-3 game" id="area-sent">
             <div id="words-box"></div>
+            <button class="reload-button" title="Volver"></button>
+            <button class="restart" title="Restart"></button>
 		</div>
 
     </div>

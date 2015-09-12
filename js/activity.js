@@ -118,7 +118,7 @@ define(function (require) {
 
         // Initialize the activity.
         activity.setup();
-        $('#reload-button').on('click', function() {
+        $('.reload-button').on('click', function() {
             location.reload();
         });
         var selectMenu = function(level) {
@@ -183,6 +183,9 @@ define(function (require) {
             else if (level === '3') {
                 var sentence = new Sentences();
                 sentence.randomSentence();
+                $('.restart').on('click', function(){
+                    sentence.randomSentence();
+                });
 
                 var items_word = interact(".word-sent");
                 var area_word = interact("#area-sent");
