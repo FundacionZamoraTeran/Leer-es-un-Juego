@@ -63,6 +63,11 @@ define(function (require) {
         this.words_found = [];
     }
 
+    Soup.prototype.reset = function() {
+        this.words = [];
+        this.words_found = [];
+    };
+
     Soup.prototype.randomWords = function() {
         for (var i = 0; this.words.length < 10; i++) {
             var tmp_word = words[Math.floor(Math.random() * words.length)];
@@ -70,6 +75,7 @@ define(function (require) {
                 this.words.push(tmp_word);
             }
         }
+
     };
 
     Soup.prototype.setWords = function() {
@@ -178,6 +184,14 @@ define(function (require) {
                 var soup = new Soup();
                 soup.randomWords();
                 soup.setWords();
+
+                $('#restart-soup').on('click', function(e) {
+                    e.preventDefault();
+                    soup.reset();
+                    soup.randomWords();
+                    soup.setWords();
+                    $('#win-msg').addClass('hidden');
+                });
             }
 
             else if (level === '3') {

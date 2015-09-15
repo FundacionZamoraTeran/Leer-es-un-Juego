@@ -141,6 +141,12 @@
   font-weight: bold;
   padding: 100px;
   font-size: 20px;
+  border-radius: 20px;
+}
+
+#win-msg a {
+  color: #fff;
+  text-decoration: underline;
 }
 
 canvas {

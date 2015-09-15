@@ -24,7 +24,8 @@ define(function (require) {
         this.animation_runnning = false;
 
         this.init = function () {
-            var orientations = ['horizontal', 'vertical'];
+            var orientations = ['horizontal', 'vertical', 'verticalUp',
+                'diagonal', 'diagonalUp'];
             this.puzzleGame = wordfind.newPuzzle(this.game.words,
                                         {height: 10, width: 10,
                                          orientations: orientations,
