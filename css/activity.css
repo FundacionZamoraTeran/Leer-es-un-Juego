@@ -44,11 +44,11 @@
   text-align: center;
   display: inline-block;
   border-radius: 5px;
-  margin: 10px;
+  margin: 7px;
   background-color: #f8d09a;
   color: #000;
   font-weight: bold;
-  font-size: 24px;
+  font-size: 28px;
   box-shadow: 0 2px #eb893d;
 }
 
@@ -190,19 +190,17 @@ canvas {
 }
 
 .reload-button {
-  background: url(../images/back.svg) 0 0 no-repeat;
   position: absolute;
-  width: 35px;
-  height: 35px;
+  padding: 5px 8px 5px 8px;
   bottom:5px;
   right: 5px;
+  font-size: 20px;
 }
 
 .restart {
-  background: url(../images/restart.svg) 0 0 no-repeat;
   position: absolute;
-  width: 35px;
-  height: 35px;
+  padding: 5px 8px 5px 8px;
   bottom:5px;
-  right: 50px;
+  margin-left: 10px;
+  font-size: 20px;
 }
