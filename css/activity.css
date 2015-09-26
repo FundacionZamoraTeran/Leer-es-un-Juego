@@ -161,8 +161,11 @@ canvas {
   background-color: rgba(255, 255, 255,0.5);
   margin-top: 100px;
   margin-left: 50px;
+  padding-top: 60px;
   padding: 40px;
   text-align: center;
+  font-size: 40px;
+  font-weight: bold;
 }
 
 #level-1 {

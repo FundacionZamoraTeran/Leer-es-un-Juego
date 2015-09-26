@@ -7,7 +7,7 @@ define(function (require) {
     var Mustache = require("mustache.min");
     var wordmatrix = require("../js/wordmatrix.js");
     var words = require("../js/words.js");
-    var sentences = require("../js/sentences.js");
+    var vocabulary = require("../js/sentences.js");
 
     var sugarCellSize = 75;
     /*
@@ -107,14 +107,14 @@ define(function (require) {
      * Manage letters for the third level
      */
     function Sentences() {
-        this.sentence = [];
+        this.vocabulary = [];
     }
 
     Sentences.prototype.randomSentence = function() {
-        this.sentence = sentences[Math.floor(Math.random() * sentences.length)];
-        var output = Mustache.render('{{#sentence}}<div class="word word-sent">{{.}}</div>{{/sentence}}', this);
+        this.vocabulary = vocabulary[Math.floor(Math.random() * vocabulary.length)];
+        var output = Mustache.render('{{#words}}<div class="word word-sent">{{.}}</div>{{/words}}', this.vocabulary);
         $('#words-sentence').html(output);
-        var box = Mustache.render('{{#sentence}} ___________ {{/sentence}}', this);
+        var box = Mustache.render('{{#words}} ____ {{/words}}', this.vocabulary);
         $('#words-box').html(box);
     };
 
