@@ -192,11 +192,22 @@ canvas {
   background: url(../images/menu3.jpg) 0 0 no-repeat;
 }
 
-.reload-button {
+#buttons {
   position: absolute;
+  bottom: 0;
+  height: 40px;
+}
+
+.reload-button {
+  float: left;
   padding: 5px 8px 5px 8px;
-  bottom:5px;
-  right: 5px;
+  font-size: 20px;
+  margin: 0 5px 0 5px;
+}
+
+.view-answer {
+  float: left;
+  padding: 5px 8px 5px 8px;
   font-size: 20px;
 }
 
@@ -206,4 +217,16 @@ canvas {
   bottom:5px;
   margin-left: 10px;
   font-size: 20px;
+  right: 5px;
+}
+
+#answer {
+  margin: 80px auto 0 auto;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 26px;
+  text-decoration: underline;
+  background-color: #3d53a1;
+  font-weight: bold;
+  color: #fff;
 }

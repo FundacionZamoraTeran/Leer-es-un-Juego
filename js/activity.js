@@ -116,6 +116,11 @@ define(function (require) {
         $('#words-sentence').html(output);
         var box = Mustache.render('{{#words}} ____ {{/words}}', this.vocabulary);
         $('#words-box').html(box);
+        $('#answer').html('');
+    };
+
+    Sentences.prototype.showAnswer = function() {
+        $('#answer').html(this.vocabulary.sentence);
     };
 
 
@@ -199,6 +204,10 @@ define(function (require) {
                 sentence.randomSentence();
                 $('.restart').on('click', function(){
                     sentence.randomSentence();
+                });
+
+                $('.view-answer').on('click', function() {
+                    sentence.showAnswer();
                 });
 
                 var items_word = interact(".word-sent");
