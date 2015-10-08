@@ -121,7 +121,7 @@
   background-color: #3d53a1;
   color: #fff;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 22px;
 }
 
 .word-found {
@@ -203,6 +203,18 @@ canvas {
   padding: 5px 8px 5px 8px;
   font-size: 20px;
   margin: 0 5px 0 5px;
+}
+
+.reload {
+  font-size: 20px;
+  margin: 0 5px 0 5px;
+  position: absolute;
+  padding: 5px 8px 5px 8px;
+  bottom:5px;
+  margin-left: 10px;
+  font-size: 20px;
+  right: 5px;
+  float: none;
 }
 
 .view-answer {

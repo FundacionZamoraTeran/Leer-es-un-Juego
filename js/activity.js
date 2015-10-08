@@ -83,8 +83,8 @@ define(function (require) {
         $('#words-list').html(output);
         var gameCanvas = document.getElementById("matrix-canvas");
         //gameCanvas.height = window.innerHeight - sugarCellSize;
-        gameCanvas.height = 600;
-        gameCanvas.width = 600;
+        gameCanvas.height = 700;
+        gameCanvas.width = 700;
         this.matrixView = new wordmatrix.MatrixView(gameCanvas, this);
         this.matrixView.init();
     };
