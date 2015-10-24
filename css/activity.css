@@ -92,6 +92,17 @@
   box-shadow: 0 2px 5px #000;
 }
 
+#lines {
+  width: 500px;
+  margin: 100px auto 0 auto;
+  overflow: hidden;
+}
+
+#lines p {
+  line-height: 30px;
+  font-size: 45px;
+}
+
 /* Level Two */
 
 #soup h1 {
