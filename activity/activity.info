@@ -3,4 +3,4 @@ name = Letropolis
 activity_version = 8
 bundle_id = org.sugarlabs.LeerJuego
 exec = sugar-activity-web
-icon = activity-icon
+icon = icono

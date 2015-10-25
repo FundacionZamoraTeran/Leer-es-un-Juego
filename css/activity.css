@@ -258,7 +258,7 @@ canvas {
 
 .disabled {
   background-color: grey;
-  color: #c9c9c9 !important;
+  color: #575757 !important;
 }
 .disabled:hover {
   background-color: grey;
@@ -266,5 +266,5 @@ canvas {
 }
 
 .toolbar #stop-button {
-  background-image: url('../images/activity-stop.svg') !important;
+  background-image: url('../images/activity-stop.png') !important;
 }
