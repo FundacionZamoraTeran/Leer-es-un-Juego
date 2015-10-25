@@ -114,7 +114,7 @@ define(function (require) {
         this.vocabulary = vocabulary[Math.floor(Math.random() * vocabulary.length)];
         var output = Mustache.render('{{#words}}<div class="word word-sent">{{.}}</div>{{/words}}', this.vocabulary);
         $('#words-sentence').html(output);
-        var box = Mustache.render('{{#words}} ____ {{/words}}', this.vocabulary);
+        var box = Mustache.render('{{#words}} ________ {{/words}}', this.vocabulary);
         $('#words-box').html(box);
         $('#answer').html('');
     };
@@ -123,6 +123,17 @@ define(function (require) {
         $('#answer').html(this.vocabulary.sentence);
     };
 
+    Sentences.prototype.checkViewAnswer = function(count) {
+        if (count === this.vocabulary['words'].length) {
+            $('.view-answer').removeClass('disabled');
+            $('.view-answer').prop('disabled', false);
+        }
+
+        else {
+            $('.view-answer').addClass('disabled');
+            $('.view-answer').prop('disabled', true);
+        }
+    };
 
     // Manipulate the DOM only when it is ready.
     require(['domReady!'], function (doc) {
@@ -217,7 +228,7 @@ define(function (require) {
                     initial: true,
                     onmove: moveItem,
                 });
-
+                count = 0
                 area_word.dropzone({
                     // Only accept .item
                     accept: '.word-sent',
@@ -229,6 +240,16 @@ define(function (require) {
                         var target = event.relatedTarget;
                         $(target).addClass('enter');
                     },
+
+                    ondrop: function(event) {
+                        count++;
+                        sentence.checkViewAnswer(count);
+                    },
+                    ondragleave: function(event) {
+                        count--;
+                        sentence.checkViewAnswer(count);
+                    },
+
 
                 });
             }

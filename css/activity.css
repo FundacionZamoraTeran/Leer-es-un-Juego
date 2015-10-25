@@ -132,7 +132,7 @@
   background-color: #3d53a1;
   color: #fff;
   font-weight: bold;
-  font-size: 22px;
+  font-size: 28px;
 }
 
 .word-found {
@@ -177,6 +177,7 @@ canvas {
   text-align: center;
   font-size: 40px;
   font-weight: bold;
+  line-height: 60px;
 }
 
 #level-1 {
@@ -252,4 +253,14 @@ canvas {
   background-color: #3d53a1;
   font-weight: bold;
   color: #fff;
+}
+
+
+.disabled {
+  background-color: grey;
+  color: #c9c9c9 !important;
+}
+.disabled:hover {
+  background-color: grey;
+  border-color: grey;
 }
