@@ -264,3 +264,7 @@ canvas {
   background-color: grey;
   border-color: grey;
 }
+
+.toolbar #stop-button {
+  background-image: url('../images/activity-stop.svg') !important;
+}
