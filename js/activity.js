@@ -214,6 +214,7 @@ define(function (require) {
                 var sentence = new Sentences();
                 sentence.randomSentence();
                 $('.restart').on('click', function() {
+                    count = 0;
                     $('.view-answer').addClass('disabled');
                     $('.view-answer').prop('disabled', true);
                     sentence.randomSentence();
@@ -230,7 +231,7 @@ define(function (require) {
                     initial: true,
                     onmove: moveItem,
                 });
-                count = 0
+                count = 0;
                 area_word.dropzone({
                     // Only accept .item
                     accept: '.word-sent',
