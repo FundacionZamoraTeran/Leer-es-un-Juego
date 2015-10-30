@@ -213,7 +213,9 @@ define(function (require) {
             else if (level === '3') {
                 var sentence = new Sentences();
                 sentence.randomSentence();
-                $('.restart').on('click', function(){
+                $('.restart').on('click', function() {
+                    $('.view-answer').addClass('disabled');
+                    $('.view-answer').prop('disabled', true);
                     sentence.randomSentence();
                 });
 
